@@ -8,13 +8,14 @@ namespace ACO_TSP_New
 {
     class Program
     {
-        const UInt32 MaxCandListSize = 64;
+        public static UInt32 MaxCandListSize;
         static void Main(string[] args)
         {
             Point[] points = TSPFileReader.ReadTspFile(@"TSP\kroA100.tsp");
             Graph graph = new Graph(points);
             Parameters parameters = new Parameters();
             parameters.SetAntsCount(graph.dimension);
+            MaxCandListSize = graph.dimension - 1;
             RunMMAS(graph, parameters, 1000000 / parameters.antsCount);
             Console.ReadKey();
         }
